@@ -16,16 +16,16 @@ const feature = (query) => {
             x = JSON.parse(body);
             const hitCount = x.total;
             if (hitCount > 0) {
-                console.log(hitCount + ' some aids');
+                console.log(hitCount + ' too many packages!');
             } else {
-                console.log(hitCount + 'no aids');
+                console.log(hitCount + ' no packages :) you win!');
             }
         }
     })
 };
 
 hey = (query) => {
-    wordpos.isNoun(query, (wasItANoun) => {
+    wordpos.isNoun(query).then((wasItANoun) => {
         if (!wasItANoun) {
             console.log('not a noun');
         } else {
