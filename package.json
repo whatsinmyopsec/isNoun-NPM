@@ -1,0 +1,27 @@
+{
+  "name": "isnoun-npm",
+  "version": "1.0.0",
+  "description": "is this noun a package?",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whatsinmyopsec/isNoun-NPM.git"
+  },
+  "keywords": [
+    "nodejs",
+    "npm"
+  ],
+  "author": "me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/whatsinmyopsec/isNoun-NPM/issues"
+  },
+  "homepage": "https://github.com/whatsinmyopsec/isNoun-NPM#readme",
+  "dependencies": {
+    "request": "^2.88.2",
+    "wordpos": "^2.1.0"
+  }
+}
