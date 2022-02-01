@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "is this noun a package?",
   "main": "index.js",
+  "engines": {
+    "node": "14.18.0"
+  },
   "scripts": {
     "start": "node index.js"
   },
