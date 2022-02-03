@@ -33,7 +33,6 @@ async function feature(query) {
         } else
             console.log('an adverb,')
 
-            
         const response = await fetch('https://api.npms.io/v2/search?q=' + query)
         const out = await response.json();
         var data = out.total;
