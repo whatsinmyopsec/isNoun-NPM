@@ -13,7 +13,7 @@ async function feature(query) {
         const wasItAnAdverb = await wordpos.isAdverb(query)
 
         if (!wasItANoun) {
-            console.log('Not a noun,');
+            console.log('not a noun,');
 
         } else
             console.log('a noun,');
