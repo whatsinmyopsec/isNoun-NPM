@@ -1,5 +1,5 @@
 {
-  "name": "isnoun-npm",
+  "name": "isword-npm",
   "version": "1.0.0",
   "description": "is this noun a package?",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/whatsinmyopsec/isNoun-NPM.git"
+    "url": "git+https://github.com/whatsinmyopsec/isWord-NPM.git"
   },
   "keywords": [
     "nodejs",
@@ -20,9 +20,9 @@
   "author": "me",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/whatsinmyopsec/isNoun-NPM/issues"
+    "url": "https://github.com/whatsinmyopsec/isWord-NPM/issues"
   },
-  "homepage": "https://github.com/whatsinmyopsec/isNoun-NPM#readme",
+  "homepage": "https://github.com/whatsinmyopsec/isWord-NPM#readme",
   "dependencies": {
     "node-fetch": "^2.6.7",
     "wordpos": "^2.1.0"
