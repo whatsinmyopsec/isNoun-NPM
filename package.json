@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/whatsinmyopsec/isNoun-NPM#readme",
   "dependencies": {
-    "request": "^2.88.2",
+    "node-fetch": "^2.6.7",
     "wordpos": "^2.1.0"
   }
 }

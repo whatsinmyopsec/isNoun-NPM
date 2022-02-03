@@ -1,40 +1,36 @@
 const wordPos = require('wordpos');
-const request = require('request');
-
+const fetch = require('node-fetch');
 
 const wordpos = new wordPos();
 
-const feature = (query) => {
-    request({
-        url: 'https://api.npms.io/v2/search?q=' + query,
-        options: { json: true }
-    }, (err, res, body) => {
-        if (err) {
-            return console.log(err);
-        }
-        if (!err && res.statusCode === 200) {
-            x = JSON.parse(body);
-            const hitCount = x.total;
-            if (hitCount > 0) {
-                console.log(hitCount + ' too many packages!');
+async function feature(query) {
+    await wordpos.isNoun(query)
+        .then(async (wasItANoun) => {
+            if (!wasItANoun) {
+                console.log('not a noun');
             } else {
-                console.log(hitCount + ' no packages :) you win!');
+                console.log('it was a noun');
+                await fetch('https://api.npms.io/v2/search?q=' + query)
+                    .then(async res => await res.json())
+                    .then(async (out) => {
+                        let data = await out.total;
+                        if (data > 0) {
+                            console.log(data + ' too many results');
+                            return data;
+                        } else {
+                            console.log(data + ' no results');
+                            return data;
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             }
+        })
+        .catch((err) => {
+            console.log(err);
         }
-    })
-};
+        );
+}
 
-hey = (query) => {
-    wordpos.isNoun(query).then((wasItANoun) => {
-        if (!wasItANoun) {
-            console.log('not a noun');
-        } else {
-            feature(query);
-        }
-    });
-};
-
-console.log(hey(process.argv[2]));
-
-// disguss
-
+feature(process.argv[2]);
