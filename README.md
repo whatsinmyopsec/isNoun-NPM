@@ -12,13 +12,20 @@ npm install isword-npm
 ```javascript
 const isWord = require('isword-npm');
 
-isWord('word');
+(async () => {
+  const type = await isWord('cruelly');
+  console.log(type);
+})(); 
 ```
 ### Which displays
 
 ```sh
-word is a noun
-7830 too many results
+cruelly is not a noun
+cruelly is not a verb
+cruelly is not an adjective
+cruelly is an adverb
+0 no results
+0
 ```
 
 
