@@ -1,51 +1,62 @@
-const wordPos = require('wordpos');
-const fetch = require('node-fetch');
+const wordPos = require(`wordpos`);
+const fetch = require(`node-fetch`);
 
 const wordpos = new wordPos();
 
 
-async function feature(query) {
-    console.log(query + ' is ');
+const makeupmind = async (input, query, text) => {
+    let word = (text === "adverb" || text === "adjective" ) ? `an ${text}`: `a ${text}`;
+    if (input) {
+        console.log(`${query} is ${word}`);
+        return searchNPM(query);
+    }
+}
+
+
+const getWordType = async (query) => {
     try {
-        const wasItANoun = await wordpos.isNoun(query)
-        const wasItAVerb = await wordpos.isVerb(query)
-        const wasItAnAdjective = await wordpos.isAdjective(query)
-        const wasItAnAdverb = await wordpos.isAdverb(query)
+        const wasItANoun = await wordpos.isNoun(query);
 
-        if (!wasItANoun) {
-            console.log('not a noun,');
-
-        } else
-            console.log('a noun,');
-        if (!wasItAVerb) {
-            console.log('not a verb,');
-
-        } else
-            console.log('a verb,')
-        if (!wasItAnAdjective) {
-            console.log('not an adjective,');
-
-        } else
-            console.log('an adjective,')
-        if (!wasItAnAdverb) {
-            console.log('not an adverb,');
-
-        } else
-            console.log('an adverb,')
-
-        const response = await fetch('https://api.npms.io/v2/search?q=' + query)
-        const out = await response.json();
-        var data = out.total;
-        if (data > 0) {
-            console.log(data + ' too many results');
-            return data;
-        } else {
-            console.log(data + ' no results');
-            return data;
+        if (wasItANoun) {
+            return makeupmind(wasItANoun, query, `noun`);
         }
+        console.log(`${query} is not a noun`);
+        const wasItAVerb = await wordpos.isVerb(query);
+
+        if (wasItAVerb) {
+            return makeupmind(wasItAVerb, query, `verb`);
+        }
+        console.log(`${query} is not a verb`);
+        const wasItAnAdjective = await wordpos.isAdjective(query);
+
+        if (wasItAnAdjective) {
+            return makeupmind(wasItAnAdjective, query, `adjective`);
+        }
+        console.log(`${query} is not an adjective`);
+        const wasItAnAdverb = await wordpos.isAdverb(query);
+
+        if (wasItAnAdverb) {
+            return makeupmind(wasItAnAdverb, query, `adverb`);
+        }
+        console.log(`${query} is not an adverb`);
     } catch (err) {
         console.log(err);
     }
 }
 
-feature(process.argv[2]);
+const searchNPM = async (query) => {
+    const response = await fetch(`https://api.npms.io/v2/search?q=${query}`);
+    const out = await response.json();
+    var data = out.total;
+    if (data > 0) {
+        console.log(`${data} too many results`);
+        return data;
+    } else {
+        console.log(`${data} no results`);
+        return data;
+    }
+}
+
+
+//getWordType(process.argv[2]);
+module.exports = getWordType;
