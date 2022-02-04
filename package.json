@@ -1,6 +1,6 @@
 {
   "name": "isword-npm",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "is this word type an npm package?",
   "main": "index.js",
   "engines": {
